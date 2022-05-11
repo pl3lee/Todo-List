@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+* {
+    box-sizing: border-box;
+    
+}
+body {
+    width: 100vw;
+    min-width: 500px;
+    height: 100vh;
+    background-color: #44403c;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    color: white;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    grid-template-rows: 1fr;
+}
+
+.sidebar {
+    background-color: #1c1917;
+    height: 100vh;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 9fr 1fr;
+    gap: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.header {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.project-list {
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #292524;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.project {
+    font-size: larger;
+    border-radius: 20px;
+    padding: 10px 20px;
+    transition: all 0.1s ease;
+}
+.project.selected {
+    background-color: #44403c;
+}
+.project:hover {
+    transform: scale(1.05);
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.button {
+    background-color: #57534e;
+    padding: 10px;
+    border-radius: 15px;
+    transition: all 0.1s ease;
+}
+
+.button:hover {
+    transform: scale(1.05);
+}
+
+.main-content {
+    height: 100vh;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 9fr 1fr;
+    gap: 10px;
+}
+
+.todo-list {
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+    background-color: #292524; /* temp */
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.todo {
+    height: 50px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.todo-status {
+    flex: 0.5;
+}
+.todo-title-date-container {
+    flex: 15;
+}
+.todo-priority {
+    flex: 0.5;
+    text-align: right;
+    padding-right: 10px;
+}
+.todo-info {
+    flex: 0.5;
+}
+.divider {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+#radio.material-symbols-outlined.completed {
+  font-variation-settings:
+  'FILL' 100,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
