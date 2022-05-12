@@ -36,11 +36,22 @@ const DisplayController = (() => {
     // id is an integer
     const displayTodoList = (id) => {
         todoList.replaceChildren();
-        let targetProject = ProjectList.findProjectById(id);
+        // let targetProject = ProjectList.findProjectById(id);
+        let targetProject;
+        ProjectList.contents.forEach((element) => {
+            // console.log(project);
+            if (element.getId() == id) {
+                console.log("returned project:");
+                console.log(element);
+                targetProject = element;
+            }
+        });
         console.log(targetProject);
         let targetProjectLen = targetProject.numTodo();
+        console.log(targetProjectLen);
         for (let i = 0; i < targetProjectLen; i++) {
             let todo = targetProject.getTodoAt(i);
+            console.log(todo);
             todoList.appendChild(todo.getDom("todo" + i));
         }
     }

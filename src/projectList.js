@@ -30,6 +30,7 @@ const ProjectList = (() => {
     };
     const numProjects = () => contents.length;
     return {
+        contents,
         addProjectNew,
         removeProject,
         findProjectById,

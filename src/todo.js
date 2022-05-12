@@ -1,7 +1,7 @@
-import 'date-fns';
+import {format, isValid} from 'date-fns';
 const Todo = (title) => {
     let description = '';
-    let dueDate = new Date;
+    let dueDate = new Date('');
     let priority = 0; //0 (default), 1, 2, 3
     let completed = false;
     const getTitle = () => title;
@@ -45,7 +45,8 @@ const Todo = (title) => {
         todoTitle.textContent = title;
         todoDate.classList.add('todo-date');
         todoDate.id = id;
-        todoDate.textContent = format(dueDate, 'MM/dd/yyyy');
+        if (isValid(dueDate)) todoDate.textContent = format(dueDate, 'yyyy-MM-dd');
+        
 
         let todoPriority = document.createElement('div');
         todoPriority.classList.add('todo-priority');
