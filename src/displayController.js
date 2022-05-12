@@ -1,5 +1,5 @@
 import Project from './project.js';
-
+import ProjectList from './projectList.js';
 const DisplayController = (() => {
     let projectCount = 0;
     // let currentlySelectedProject = -1;
@@ -15,7 +15,7 @@ const DisplayController = (() => {
     };
     const addProject = (project) => {
         // let projectList = document.querySelector('.project-list')
-        let id = 'project' + projectCount;
+        let id = projectCount;
         projectCount++;
         let projectDiv = project.getDom(id);
         projectDiv.addEventListener('click', (event) => {
@@ -33,9 +33,21 @@ const DisplayController = (() => {
         projectList.removeChild(project);
     };
 
+    // id is an integer
+    const displayTodoList = (id) => {
+        todoList.replaceChildren();
+        let targetProject = ProjectList.findProjectById(id);
+        console.log(targetProject);
+        let targetProjectLen = targetProject.numTodo();
+        for (let i = 0; i < targetProjectLen; i++) {
+            let todo = targetProject.getTodoAt(i);
+            todoList.appendChild(todo.getDom("todo" + i));
+        }
+    }
     return {
         addProject,
         deleteProject,
+        displayTodoList,
     };
 })();
 

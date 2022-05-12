@@ -47,10 +47,19 @@ body {
 }
 
 .project {
-    font-size: larger;
     border-radius: 20px;
     padding: 10px 20px;
     transition: all 0.1s ease;
+    display: flex;
+}
+
+.project-name {
+    font-size: larger;
+}
+.project-delete {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
 }
 .project.selected {
     background-color: #44403c;
@@ -120,7 +129,7 @@ body {
 .divider {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
-#radio.material-symbols-outlined.completed {
+.radio.material-symbols-outlined.completed {
   font-variation-settings:
   'FILL' 100,
   'wght' 400,
