@@ -178,7 +178,7 @@ body {
     justify-content: center;
 }
 
-.add-project-text, .add-todo-text {
+.add-project-text, .add-todo-text, .todo-info-text{
     text-align: center;
 }
 
@@ -227,4 +227,41 @@ input#todo-date {
 select {
     border-radius: 15px;
     padding: 5px;
+}
+
+textarea#todo-description {
+    height: 100px;
+    overflow: auto;
+    resize: none;
+    border-radius: 10px;
+    border: transparent;
+    padding: 10px;
+}
+
+#todo-info.modal-main {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.todo-info {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.info-name {
+    font-size: large;
+}
+
+.actual-info {
+    background-color: #44403c;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+#description.actual-info {
+    height: 100px;
+    overflow: auto;
+    width: 80%;
 }

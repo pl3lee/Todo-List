@@ -1,23 +1,23 @@
 import {format, isValid} from 'date-fns';
 import DisplayController from './displayController.js';
 import Project from './project.js';
-const Todo = (title, project) => {
+function Todo(title, project) {
     let description = '';
     let dueDate = new Date('');
     let priority = 0; //0 (default), 1, 2, 3
     let completed = false;
-    const getTitle = () => title;
-    const getDescription = () => description;
-    const getDueDate = () => dueDate;
-    const getPriority = () => priority;
-    const setTitle = (newTitle) => title = newTitle;
-    const setDescription = (desc) => description = desc;
-    const setDueDate = (year, month, day) => dueDate = new Date(year, month - 1, day);
-    const setPriority = (newPriority) => priority = newPriority;
-    const getStatus = () => completed;
-    const toggleStatus = () => completed = !completed;
+    this.getTitle = () => title;
+    this.getDescription = () => description;
+    this.getDueDate = () => dueDate;
+    this.getPriority = () => priority;
+    this.setTitle = (newTitle) => title = newTitle;
+    this.setDescription = (desc) => description = desc;
+    this.setDueDate = (year, month, day) => dueDate = new Date(year, month - 1, day);
+    this.setPriority = (newPriority) => priority = newPriority;
+    this.getStatus = () => completed;
+    this.toggleStatus = () => completed = !completed;
     // id is an integer
-    const getDom = (id) => {
+    this.getDom = (id) => {
         let todoDiv = document.createElement('div');
         todoDiv.classList.add('todo');
         let stringId = "todo" + id;
@@ -34,7 +34,7 @@ const Todo = (title, project) => {
         if (completed) statusIcon.classList.add('completed');
         todoStatus.appendChild(statusIcon);
         todoStatus.addEventListener('click', (event) => {
-            toggleStatus();
+            this.toggleStatus();
             // console.log(statusIcon);
             event.target.replaceChildren();
             let statusIcon = document.createElement('span');
@@ -79,22 +79,39 @@ const Todo = (title, project) => {
         infoIcon.classList.add("material-symbols-outlined");
         infoIcon.id = stringId;
         infoIcon.textContent = 'info';
+        todoInfo.addEventListener('click', (event) => {
+            let infoName = document.querySelector('#name.actual-info');
+            let infoDate = document.querySelector('#date.actual-info');
+            let infoPriority = document.querySelector('#priority.actual-info');
+            let infoDescription = document.querySelector('#description.actual-info');
+            infoName.textContent = title;
+            
+            if (isValid(dueDate)) {
+                infoDate.textContent = format(dueDate, 'yyyy-MM-dd');
+            } else {
+                infoDate.textContent = "Unspecified";
+            }
+            infoPriority.textContent = priority;
+            infoDescription.textContent = description;
+            let infoModal = document.querySelector('#todo-info.modal');
+            infoModal.classList.remove('closed');
+        });
         todoInfo.appendChild(infoIcon);
 
         return todoDiv;
     };
-    return {
-        getTitle,
-        getDescription,
-        getDueDate,
-        getPriority,
-        setTitle,
-        setDescription,
-        setDueDate,
-        setPriority,
-        getStatus,
-        toggleStatus,
-        getDom,
-    };
+    // return {
+    //     getTitle,
+    //     getDescription,
+    //     getDueDate,
+    //     getPriority,
+    //     setTitle,
+    //     setDescription,
+    //     setDueDate,
+    //     setPriority,
+    //     getStatus,
+    //     toggleStatus,
+    //     getDom,
+    // };
 };
 export default Todo;
