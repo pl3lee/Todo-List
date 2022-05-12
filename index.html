@@ -156,6 +156,10 @@
                                 <option value="3">World's most important</option>
                             </select>
                         </div>
+                        <div>
+                            <label for="todo-description">Description:</label>
+                            <textarea id="todo-description" name="todo-description" rows="5" cols="100"> </textarea>
+                        </div>
                     </form>
                     
                 </div>
@@ -165,6 +169,41 @@
                     </div>
                     <div class="button" id="cancel">
                         Cancel
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal closed" id="todo-info">
+            <div class="modal-content">
+                <div class="modal-header header" id="todo-info">
+                    <div class="todo-info-text">Information</div>
+                </div>
+                <div class="modal-main" id="todo-info">
+                    <div class="todo-info" id="name">
+                        <div class="info-name">Name:</div>
+                        <div class="actual-info" id="name">Sample todo 1</div>
+                    </div>
+                    <div class="todo-info" id="description">
+                        <div class="info-name">Description:</div>
+                        <div class="actual-info" id="description">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse in enim velit fugit, dolore libero excepturi quo reiciendis. Facilis voluptates deserunt molestiae dicta labore architecto minus distinctio tenetur quasi quia.
+                        </div>
+                    </div>
+                    <div class="todo-info" id="date">
+                        <div class="info-name">Due Date:</div>
+                        <div class="actual-info" id="date">
+                            yyyy/mm/dd
+                        </div>
+                    </div>
+                    <div class="todo-info" id="priority">
+                        <div class="info-name">Priority</div>
+                        <div class="actual-info" id="priority">Very Urgent</div>
+                    </div>
+                </div>
+                <div class="modal-footer" id="todo-info">
+                    <div class="button" id="done">
+                        Done
                     </div>
                 </div>
             </div>
