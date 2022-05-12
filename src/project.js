@@ -36,8 +36,9 @@ function Project(title, id) {
             DisplayController.removeSelectedClass();
             event.stopPropagation()
             event.currentTarget.classList.add('selected');
-            console.log(this);
+            // console.log(this);
             DisplayController.displayTodoList(this);
+            DisplayController.setCurrentlySelectedProject(this);
         });
         return projectDiv;
     };

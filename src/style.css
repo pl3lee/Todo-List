@@ -144,3 +144,87 @@ body {
   'opsz' 48
 }
 
+.modal {
+    display: flex; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    /* overflow: auto;  */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+  
+.modal.closed {
+      display: none;
+}
+
+.modal-content {
+    background-color: #78716c;
+    border-radius: 20px;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50vw;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+#add-project.modal-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.add-project-text, .add-todo-text {
+    text-align: center;
+}
+
+.modal-main  > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.modal-main > form > div {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.modal-main > form > div > input {
+    width: 80%;
+    height: 30px;
+    border-radius: 10px;
+    /* box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; */
+    border: transparent;
+    padding: 10px;
+}
+
+.modal-footer {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 10px;
+}
+.modal-footer > div.button {
+    width: 100px;
+    padding: 10px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input#todo-date {
+    width: 150px;
+}
+
+select {
+    border-radius: 15px;
+    padding: 5px;
+}

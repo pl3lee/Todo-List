@@ -4,7 +4,7 @@ const ProjectList = (() => {
     let contents = [];
     // id is an integer
     const addProjectNew = (title, id) => {
-        let newProject = Project(title, id);
+        let newProject = new Project(title, id);
         contents.push(newProject);
         // console.log(newProject);
     };
