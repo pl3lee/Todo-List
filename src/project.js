@@ -1,16 +1,16 @@
 import Todo from './todo.js';
 import DisplayController from './displayController.js';
 // id is an int in a project
-const Project = (title, id) => {
+function Project(title, id) {
     let todoList = [];
-    const getTitle = () => title;
-    const setTitle = (newTitle) => title = newTitle;
-    const addTodo = (todo) => todoList.push(todo);
-    const getTodoAt = (index) => todoList.at(index);
-    const numTodo = () => todoList.length;
+    this.getTitle = () => title;
+    this.setTitle = (newTitle) => title = newTitle;
+    this.addTodo = (todo) => todoList.push(todo);
+    this.getTodoAt = (index) => todoList.at(index);
+    this.numTodo = () => todoList.length;
     // id is an int
-    const getId = () => id;
-    const getDom = () => {
+    this.getId = () => id;
+    this.getDom = () => {
         let stringId = "project" + id;
         let projectDiv = document.createElement('div');
         projectDiv.classList.add("project");
@@ -32,18 +32,14 @@ const Project = (title, id) => {
         });
         projectDelete.appendChild(deleteIcon);
         projectDiv.appendChild(projectDelete);
+        projectDiv.addEventListener('click', (event) => {
+            DisplayController.removeSelectedClass();
+            event.stopPropagation()
+            event.currentTarget.classList.add('selected');
+            console.log(this);
+            DisplayController.displayTodoList(this);
+        });
         return projectDiv;
-    };
-    return {
-        title,
-        id,
-        getId,
-        getTitle,
-        setTitle,
-        addTodo,
-        getTodoAt,
-        getDom,
-        numTodo,
     };
 };
 

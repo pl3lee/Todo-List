@@ -18,11 +18,6 @@ const DisplayController = (() => {
         let id = projectCount;
         projectCount++;
         let projectDiv = project.getDom(id);
-        projectDiv.addEventListener('click', (event) => {
-            removeSelectedClass();
-            event.stopPropagation()
-            event.currentTarget.classList.add('selected');
-        });
         if (projectCount - 1 == 0) projectDiv.classList.add('selected');
         projectList.appendChild(projectDiv);
     };
@@ -34,31 +29,32 @@ const DisplayController = (() => {
     };
 
     // id is an integer
-    const displayTodoList = (id) => {
+    const displayTodoList = (project) => {
         todoList.replaceChildren();
         // let targetProject = ProjectList.findProjectById(id);
-        let targetProject;
-        ProjectList.contents.forEach((element) => {
-            // console.log(project);
-            if (element.getId() == id) {
-                console.log("returned project:");
-                console.log(element);
-                targetProject = element;
-            }
-        });
-        console.log(targetProject);
-        let targetProjectLen = targetProject.numTodo();
-        console.log(targetProjectLen);
-        for (let i = 0; i < targetProjectLen; i++) {
-            let todo = targetProject.getTodoAt(i);
-            console.log(todo);
-            todoList.appendChild(todo.getDom("todo" + i));
+        // let targetProject;
+        // ProjectList.contents.forEach((element) => {
+        //     // console.log(project);
+        //     if (element.getId() == id) {
+        //         console.log("returned project:");
+        //         console.log(element);
+        //         targetProject = element;
+        //     }
+        // });
+        // console.log(targetProject);
+        let projectLen = project.numTodo();
+        // console.log(targetProjectLen);
+        for (let i = 0; i < projectLen; i++) {
+            let todo = project.getTodoAt(i);
+            // console.log(todo);
+            todoList.appendChild(todo.getDom(i));
         }
     }
     return {
         addProject,
         deleteProject,
         displayTodoList,
+        removeSelectedClass,
     };
 })();
 

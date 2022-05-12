@@ -1,5 +1,7 @@
 import {format, isValid} from 'date-fns';
-const Todo = (title) => {
+import DisplayController from './displayController.js';
+import Project from './project.js';
+const Todo = (title, project) => {
     let description = '';
     let dueDate = new Date('');
     let priority = 0; //0 (default), 1, 2, 3
@@ -14,43 +16,54 @@ const Todo = (title) => {
     const setPriority = (newPriority) => priority = newPriority;
     const getStatus = () => completed;
     const toggleStatus = () => completed = !completed;
-    // id is a string, format: todo<num>
+    // id is an integer
     const getDom = (id) => {
         let todoDiv = document.createElement('div');
         todoDiv.classList.add('todo');
-        todoDiv.id = id;
+        let stringId = "todo" + id;
+        todoDiv.id = stringId;
 
         let todoStatus = document.createElement('div');
         todoStatus.classList.add('todo-status');
-        todoStatus.id = id;
+        todoStatus.id = stringId;
         todoDiv.appendChild(todoStatus);
         let statusIcon = document.createElement('span');
-        statusIcon.classList.add("material-symbols-outlined", "completed", "radio");
-        statusIcon.id = id;
+        statusIcon.classList.add("material-symbols-outlined", "radio");
+        statusIcon.id = stringId;
         statusIcon.textContent = 'radio_button_unchecked';
+        if (completed) statusIcon.classList.add('completed');
         todoStatus.appendChild(statusIcon);
         todoStatus.addEventListener('click', (event) => {
-            //todo
+            toggleStatus();
+            // console.log(statusIcon);
+            event.target.replaceChildren();
+            let statusIcon = document.createElement('span');
+            statusIcon.classList.add("material-symbols-outlined", "radio");
+            statusIcon.id = stringId;
+            statusIcon.textContent = 'radio_button_unchecked';
+            if (completed) statusIcon.classList.add('completed');
+            event.target.appendChild(statusIcon);
+            // DisplayController.displayTodoList(project);
         });
         let todoTitleDate = document.createElement('div');
         todoTitleDate.classList.add('todo-title-date-container');
-        todoTitleDate.id = id;
+        todoTitleDate.id = stringId;
         todoDiv.appendChild(todoTitleDate);
         let todoTitle = document.createElement('div');
         let todoDate = document.createElement('div');
         todoTitleDate.appendChild(todoTitle);
         todoTitleDate.appendChild(todoDate);
         todoTitle.classList.add('todo-title');
-        todoTitle.id = id;
+        todoTitle.id = stringId;
         todoTitle.textContent = title;
         todoDate.classList.add('todo-date');
-        todoDate.id = id;
+        todoDate.id = stringId;
         if (isValid(dueDate)) todoDate.textContent = format(dueDate, 'yyyy-MM-dd');
         
 
         let todoPriority = document.createElement('div');
         todoPriority.classList.add('todo-priority');
-        todoPriority.id = id;
+        todoPriority.id = stringId;
         let priorityString = '';
         for (let i = priority; i > 0; i--) {
             priorityString = priorityString + '!';
@@ -61,10 +74,10 @@ const Todo = (title) => {
         let todoInfo = document.createElement('div');
         todoDiv.appendChild(todoInfo);
         todoInfo.classList.add('todo-info');
-        todoInfo.id = id;
+        todoInfo.id = stringId;
         let infoIcon = document.createElement('span');
         infoIcon.classList.add("material-symbols-outlined");
-        infoIcon.id = id;
+        infoIcon.id = stringId;
         infoIcon.textContent = 'info';
         todoInfo.appendChild(infoIcon);
 

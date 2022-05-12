@@ -19,8 +19,8 @@ const ProjectList = (() => {
         contents.forEach((element) => {
             // console.log(project);
             if (element.getId() == id) {
-                console.log("returned project:");
-                console.log(element);
+                // console.log("returned project:");
+                // console.log(element);
                 return element;
             }
         });
