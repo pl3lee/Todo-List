@@ -8,6 +8,12 @@ function Project(title, id) {
     this.addTodo = (todo) => todoList.push(todo);
     this.getTodoAt = (index) => todoList.at(index);
     this.numTodo = () => todoList.length;
+    this.removeTodo = (todo) => {
+        let index = todoList.indexOf(todo);
+        if (index != -1) {
+            todoList.splice(index, 1);
+        }
+    };
     // id is an int
     this.getId = () => id;
     this.getDom = () => {

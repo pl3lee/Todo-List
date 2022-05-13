@@ -71,6 +71,20 @@ function Todo(title, project) {
         todoPriority.textContent = priorityString;
         todoDiv.appendChild(todoPriority);
 
+        let todoDelete = document.createElement('div');
+        todoDiv.appendChild(todoDelete);
+        todoDelete.classList.add('todo-delete');
+        todoDelete.id = stringId;
+        let deleteIcon = document.createElement('span');
+        deleteIcon.classList.add('material-symbols-outlined');
+        deleteIcon.id = stringId;
+        deleteIcon.textContent = 'delete';
+        todoDelete.appendChild(deleteIcon);
+        todoDelete.addEventListener('click', (event) => {
+            project.removeTodo(this);
+            DisplayController.displayTodoList(project);
+        });
+
         let todoInfo = document.createElement('div');
         todoDiv.appendChild(todoInfo);
         todoInfo.classList.add('todo-info');
