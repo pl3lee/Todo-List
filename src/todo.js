@@ -16,7 +16,6 @@ function Todo(title, project) {
     this.setPriority = (newPriority) => priority = newPriority;
     this.getStatus = () => completed;
     this.toggleStatus = () => completed = !completed;
-    // id is an integer
     this.getDom = (id) => {
         let todoDiv = document.createElement('div');
         todoDiv.classList.add('todo');
@@ -35,7 +34,6 @@ function Todo(title, project) {
         todoStatus.appendChild(statusIcon);
         todoStatus.addEventListener('click', (event) => {
             this.toggleStatus();
-            // console.log(statusIcon);
             event.target.replaceChildren();
             let statusIcon = document.createElement('span');
             statusIcon.classList.add("material-symbols-outlined", "radio");
@@ -43,7 +41,6 @@ function Todo(title, project) {
             statusIcon.textContent = 'radio_button_unchecked';
             if (completed) statusIcon.classList.add('completed');
             event.target.appendChild(statusIcon);
-            // DisplayController.displayTodoList(project);
         });
         let todoTitleDate = document.createElement('div');
         todoTitleDate.classList.add('todo-title-date-container');
@@ -114,18 +111,5 @@ function Todo(title, project) {
 
         return todoDiv;
     };
-    // return {
-    //     getTitle,
-    //     getDescription,
-    //     getDueDate,
-    //     getPriority,
-    //     setTitle,
-    //     setDescription,
-    //     setDueDate,
-    //     setPriority,
-    //     getStatus,
-    //     toggleStatus,
-    //     getDom,
-    // };
 };
 export default Todo;

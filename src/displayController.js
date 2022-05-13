@@ -27,7 +27,9 @@ const DisplayController = (() => {
     let infoPriority = document.querySelector('#priority.actual-info');
     let infoDescription = document.querySelector('#description.actual-info');
     let infoDoneBtn = document.querySelector('#todo-info.modal #done.button');
-    const setCurrentlySelectedProject = (project) => currentlySelectedProject = project;
+    const setCurrentlySelectedProject = (project) => {
+        currentlySelectedProject = project;
+    }
     const setupDefaultEventListeners = () => {
         addProjectBtn.addEventListener('click', (event) => {
             addProjectModal.classList.remove('closed');
@@ -92,7 +94,6 @@ const DisplayController = (() => {
         }
     };
     const addProject = (project) => {
-        // let projectList = document.querySelector('.project-list')
         let id = projectCount;
         projectCount++;
         let projectDiv = project.getDom(id);
@@ -109,7 +110,6 @@ const DisplayController = (() => {
         projectList.removeChild(project);
     };
 
-    // id is an integer
     const displayTodoList = (project) => {
         todoList.replaceChildren();
         let projectLen = project.numTodo();
@@ -118,7 +118,16 @@ const DisplayController = (() => {
             console.log(todo);
             todoList.appendChild(todo.getDom(i));
         }
+    };
+    const emptyTodoList = () => {
+        let main = document.querySelector('.main-content');
+        todoList = document.querySelector('.todo-list')
+        let newTodoList = document.createElement('div');
+        newTodoList.classList.add('todo-list');
+        main.replaceChild(newTodoList, todoList);
+        todoList = newTodoList;
     }
+    const getCurrentlySelectedProject = () => currentlySelectedProject;
     return {
         addProject,
         deleteProject,
@@ -126,6 +135,8 @@ const DisplayController = (() => {
         removeSelectedClass,
         setupDefaultEventListeners,
         setCurrentlySelectedProject,
+        getCurrentlySelectedProject,
+        emptyTodoList,
     };
 })();
 

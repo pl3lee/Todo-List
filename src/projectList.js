@@ -1,26 +1,26 @@
+import DisplayController from './displayController.js';
 import Project from './project.js';
 
 const ProjectList = (() => {
     let contents = [];
-    // id is an integer
     const addProjectNew = (title, id) => {
         let newProject = new Project(title, id);
         contents.push(newProject);
-        // console.log(newProject);
     };
-    const removeProject = (id) => {
-        contents.forEach((project, index) => {
-            if (project.getId() == id) {
-                contents.splice(index, 1);
-            }
-        });
+    const removeProject = (project) => {
+        let index = contents.indexOf(project);
+        if (index != -1) {
+            contents.splice(index, 1);
+            project.clearTodo();
+        }
+        if (project == DisplayController.getCurrentlySelectedProject()) {
+            DisplayController.displayTodoList(project);
+        }
+        console.log(contents.length);
     };
     const findProjectById = (id) => {
         contents.forEach((element) => {
-            // console.log(project);
             if (element.getId() == id) {
-                // console.log("returned project:");
-                // console.log(element);
                 return element;
             }
         });

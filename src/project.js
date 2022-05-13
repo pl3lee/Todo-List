@@ -1,9 +1,10 @@
 import Todo from './todo.js';
 import DisplayController from './displayController.js';
-// id is an int in a project
+import ProjectList from './projectList.js';
 function Project(title, id) {
     let todoList = [];
-    this.getTitle = () => title;
+    this.title = title;
+    this.getTitle = () => this.title;
     this.setTitle = (newTitle) => title = newTitle;
     this.addTodo = (todo) => todoList.push(todo);
     this.getTodoAt = (index) => todoList.at(index);
@@ -14,7 +15,7 @@ function Project(title, id) {
             todoList.splice(index, 1);
         }
     };
-    // id is an int
+    this.clearTodo = () => this.todoList = [];
     this.getId = () => id;
     this.getDom = () => {
         let stringId = "project" + id;
@@ -35,6 +36,7 @@ function Project(title, id) {
         deleteIcon.id = stringId;
         deleteIcon.addEventListener('click', (event) => {
             DisplayController.deleteProject(event.currentTarget.id);
+            ProjectList.removeProject(this);
         });
         projectDelete.appendChild(deleteIcon);
         projectDiv.appendChild(projectDelete);
@@ -42,10 +44,10 @@ function Project(title, id) {
             DisplayController.removeSelectedClass();
             event.stopPropagation()
             event.currentTarget.classList.add('selected');
-            // console.log(this);
             DisplayController.displayTodoList(this);
             DisplayController.setCurrentlySelectedProject(this);
         });
+        this.dom = projectDiv;
         return projectDiv;
     };
 };
