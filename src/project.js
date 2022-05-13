@@ -1,8 +1,9 @@
 import Todo from './todo.js';
 import DisplayController from './displayController.js';
 import ProjectList from './projectList.js';
+
 function Project(title, id) {
-    let todoList = [];
+    const todoList = [];
     this.title = title;
     this.getTitle = () => this.title;
     this.setTitle = (newTitle) => title = newTitle;
@@ -10,7 +11,7 @@ function Project(title, id) {
     this.getTodoAt = (index) => todoList.at(index);
     this.numTodo = () => todoList.length;
     this.removeTodo = (todo) => {
-        let index = todoList.indexOf(todo);
+        const index = todoList.indexOf(todo);
         if (index != -1) {
             todoList.splice(index, 1);
         }
@@ -18,19 +19,19 @@ function Project(title, id) {
     this.clearTodo = () => this.todoList = [];
     this.getId = () => id;
     this.getDom = () => {
-        let stringId = "project" + id;
-        let projectDiv = document.createElement('div');
-        projectDiv.classList.add("project");
+        const stringId = `project${id}`;
+        const projectDiv = document.createElement('div');
+        projectDiv.classList.add('project');
         projectDiv.id = stringId;
-        let projectName = document.createElement('div');
+        const projectName = document.createElement('div');
         projectName.classList.add('project-name');
         projectName.id = stringId;
         projectName.textContent = title;
         projectDiv.appendChild(projectName);
-        let projectDelete = document.createElement('div');
+        const projectDelete = document.createElement('div');
         projectDelete.classList.add('project-delete');
         projectDelete.id = stringId;
-        let deleteIcon = document.createElement('span');
+        const deleteIcon = document.createElement('span');
         deleteIcon.classList.add('material-symbols-outlined');
         deleteIcon.textContent = 'delete';
         deleteIcon.id = stringId;
@@ -42,7 +43,7 @@ function Project(title, id) {
         projectDiv.appendChild(projectDelete);
         projectDiv.addEventListener('click', (event) => {
             DisplayController.removeSelectedClass();
-            event.stopPropagation()
+            event.stopPropagation();
             event.currentTarget.classList.add('selected');
             DisplayController.displayTodoList(this);
             DisplayController.setCurrentlySelectedProject(this);
@@ -50,6 +51,8 @@ function Project(title, id) {
         this.dom = projectDiv;
         return projectDiv;
     };
-};
-
+}
+function testFunc() {
+    const test = 0;
+}
 export default Project;

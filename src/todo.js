@@ -1,10 +1,11 @@
-import {format, isValid} from 'date-fns';
+import { format, isValid } from 'date-fns';
 import DisplayController from './displayController.js';
 import Project from './project.js';
+
 function Todo(title, project) {
     let description = '';
     let dueDate = new Date('');
-    let priority = 0; //0 (default), 1, 2, 3
+    let priority = 0; // 0 (default), 1, 2, 3
     let completed = false;
     this.getTitle = () => title;
     this.getDescription = () => description;
@@ -17,17 +18,17 @@ function Todo(title, project) {
     this.getStatus = () => completed;
     this.toggleStatus = () => completed = !completed;
     this.getDom = (id) => {
-        let todoDiv = document.createElement('div');
+        const todoDiv = document.createElement('div');
         todoDiv.classList.add('todo');
-        let stringId = "todo" + id;
+        const stringId = `todo${id}`;
         todoDiv.id = stringId;
 
-        let todoStatus = document.createElement('div');
+        const todoStatus = document.createElement('div');
         todoStatus.classList.add('todo-status');
         todoStatus.id = stringId;
         todoDiv.appendChild(todoStatus);
-        let statusIcon = document.createElement('span');
-        statusIcon.classList.add("material-symbols-outlined", "radio");
+        const statusIcon = document.createElement('span');
+        statusIcon.classList.add('material-symbols-outlined', 'radio');
         statusIcon.id = stringId;
         statusIcon.textContent = 'radio_button_unchecked';
         if (completed) statusIcon.classList.add('completed');
@@ -35,19 +36,19 @@ function Todo(title, project) {
         todoStatus.addEventListener('click', (event) => {
             this.toggleStatus();
             event.target.replaceChildren();
-            let statusIcon = document.createElement('span');
-            statusIcon.classList.add("material-symbols-outlined", "radio");
+            const statusIcon = document.createElement('span');
+            statusIcon.classList.add('material-symbols-outlined', 'radio');
             statusIcon.id = stringId;
             statusIcon.textContent = 'radio_button_unchecked';
             if (completed) statusIcon.classList.add('completed');
             event.target.appendChild(statusIcon);
         });
-        let todoTitleDate = document.createElement('div');
+        const todoTitleDate = document.createElement('div');
         todoTitleDate.classList.add('todo-title-date-container');
         todoTitleDate.id = stringId;
         todoDiv.appendChild(todoTitleDate);
-        let todoTitle = document.createElement('div');
-        let todoDate = document.createElement('div');
+        const todoTitle = document.createElement('div');
+        const todoDate = document.createElement('div');
         todoTitleDate.appendChild(todoTitle);
         todoTitleDate.appendChild(todoDate);
         todoTitle.classList.add('todo-title');
@@ -56,23 +57,22 @@ function Todo(title, project) {
         todoDate.classList.add('todo-date');
         todoDate.id = stringId;
         if (isValid(dueDate)) todoDate.textContent = format(dueDate, 'yyyy-MM-dd');
-        
 
-        let todoPriority = document.createElement('div');
+        const todoPriority = document.createElement('div');
         todoPriority.classList.add('todo-priority');
         todoPriority.id = stringId;
         let priorityString = '';
         for (let i = priority; i > 0; i--) {
-            priorityString = priorityString + '!';
+            priorityString += '!';
         }
         todoPriority.textContent = priorityString;
         todoDiv.appendChild(todoPriority);
 
-        let todoDelete = document.createElement('div');
+        const todoDelete = document.createElement('div');
         todoDiv.appendChild(todoDelete);
         todoDelete.classList.add('todo-delete');
         todoDelete.id = stringId;
-        let deleteIcon = document.createElement('span');
+        const deleteIcon = document.createElement('span');
         deleteIcon.classList.add('material-symbols-outlined');
         deleteIcon.id = stringId;
         deleteIcon.textContent = 'delete';
@@ -82,34 +82,34 @@ function Todo(title, project) {
             DisplayController.displayTodoList(project);
         });
 
-        let todoInfo = document.createElement('div');
+        const todoInfo = document.createElement('div');
         todoDiv.appendChild(todoInfo);
         todoInfo.classList.add('todo-info');
         todoInfo.id = stringId;
-        let infoIcon = document.createElement('span');
-        infoIcon.classList.add("material-symbols-outlined");
+        const infoIcon = document.createElement('span');
+        infoIcon.classList.add('material-symbols-outlined');
         infoIcon.id = stringId;
         infoIcon.textContent = 'info';
         todoInfo.addEventListener('click', (event) => {
-            let infoName = document.querySelector('#name.actual-info');
-            let infoDate = document.querySelector('#date.actual-info');
-            let infoPriority = document.querySelector('#priority.actual-info');
-            let infoDescription = document.querySelector('#description.actual-info');
+            const infoName = document.querySelector('#name.actual-info');
+            const infoDate = document.querySelector('#date.actual-info');
+            const infoPriority = document.querySelector('#priority.actual-info');
+            const infoDescription = document.querySelector('#description.actual-info');
             infoName.textContent = title;
-            
+
             if (isValid(dueDate)) {
                 infoDate.textContent = format(dueDate, 'yyyy-MM-dd');
             } else {
-                infoDate.textContent = "Unspecified";
+                infoDate.textContent = 'Unspecified';
             }
             infoPriority.textContent = priority;
             infoDescription.textContent = description;
-            let infoModal = document.querySelector('#todo-info.modal');
+            const infoModal = document.querySelector('#todo-info.modal');
             infoModal.classList.remove('closed');
         });
         todoInfo.appendChild(infoIcon);
 
         return todoDiv;
     };
-};
+}
 export default Todo;

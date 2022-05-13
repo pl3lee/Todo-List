@@ -1,35 +1,36 @@
+import { format } from 'date-fns';
 import Project from './project.js';
 import ProjectList from './projectList.js';
-import Todo from './todo.js'
-import {format} from 'date-fns';
+import Todo from './todo.js';
+
 const DisplayController = (() => {
     let projectCount = 0;
     let currentlySelectedProject = 0;
-    let projectList = document.querySelector('.project-list');
-    let addProjectBtn = document.querySelector('#add-project.button');
+    const projectList = document.querySelector('.project-list');
+    const addProjectBtn = document.querySelector('#add-project.button');
     let todoList = document.querySelector('.todo-list');
-    let addProjectDoneBtn = document.querySelector('#add-project.modal-footer > #done.button');
-    let addProjectCancelBtn = document.querySelector('#add-project.modal-footer > #cancel.button');
-    let addProjectModal = document.querySelector('#add-project.modal');
-    let projectNameInput = document.querySelector('input#project-name');
-    let addTodoBtn = document.querySelector('#add-todo.button');
-    let addTodoDoneBtn = document.querySelector('#add-todo.modal-footer > #done.button');
-    let addTodoCancelBtn = document.querySelector('#add-todo.modal-footer > #cancel.button');
-    let addTodoModal = document.querySelector('#add-todo.modal');
-    let todoNameInput = document.querySelector('input#todo-name');
-    let todoDateInput = document.querySelector('input#todo-date');
-    let todoPriorityInput = document.querySelector('select#todo-priority');
-    let todoDescriptionInput = document.querySelector('textarea#todo-description');
+    const addProjectDoneBtn = document.querySelector('#add-project.modal-footer > #done.button');
+    const addProjectCancelBtn = document.querySelector('#add-project.modal-footer > #cancel.button');
+    const addProjectModal = document.querySelector('#add-project.modal');
+    const projectNameInput = document.querySelector('input#project-name');
+    const addTodoBtn = document.querySelector('#add-todo.button');
+    const addTodoDoneBtn = document.querySelector('#add-todo.modal-footer > #done.button');
+    const addTodoCancelBtn = document.querySelector('#add-todo.modal-footer > #cancel.button');
+    const addTodoModal = document.querySelector('#add-todo.modal');
+    const todoNameInput = document.querySelector('input#todo-name');
+    const todoDateInput = document.querySelector('input#todo-date');
+    const todoPriorityInput = document.querySelector('select#todo-priority');
+    const todoDescriptionInput = document.querySelector('textarea#todo-description');
 
-    let infoModal = document.querySelector('#todo-info.modal');
-    let infoName = document.querySelector('#name.actual-info');
-    let infoDate = document.querySelector('#date.actual-info');
-    let infoPriority = document.querySelector('#priority.actual-info');
-    let infoDescription = document.querySelector('#description.actual-info');
-    let infoDoneBtn = document.querySelector('#todo-info.modal #done.button');
+    const infoModal = document.querySelector('#todo-info.modal');
+    const infoName = document.querySelector('#name.actual-info');
+    const infoDate = document.querySelector('#date.actual-info');
+    const infoPriority = document.querySelector('#priority.actual-info');
+    const infoDescription = document.querySelector('#description.actual-info');
+    const infoDoneBtn = document.querySelector('#todo-info.modal #done.button');
     const setCurrentlySelectedProject = (project) => {
         currentlySelectedProject = project;
-    }
+    };
     const setupDefaultEventListeners = () => {
         addProjectBtn.addEventListener('click', (event) => {
             addProjectModal.classList.remove('closed');
@@ -42,7 +43,7 @@ const DisplayController = (() => {
             if (projectNameInput.value == '') {
                 projectNameInput.setAttribute('placeholder', 'Please enter project name');
             } else {
-                let newProject = new Project(projectNameInput.value, projectCount);
+                const newProject = new Project(projectNameInput.value, projectCount);
                 addProject(newProject);
                 ProjectList.addProjectExisting(newProject);
                 projectNameInput.value = '';
@@ -64,11 +65,11 @@ const DisplayController = (() => {
             if (todoNameInput.value == '') {
                 todoNameInput.setAttribute('placeholder', 'Please enter to-do name');
             } else {
-                let newTodo = new Todo(todoNameInput.value, currentlySelectedProject);
+                const newTodo = new Todo(todoNameInput.value, currentlySelectedProject);
                 if (todoDateInput.value != '') {
-                    let year = todoDateInput.value.substring(0, 4);
-                    let month = todoDateInput.value.substring(5, 7);
-                    let day = todoDateInput.value.substring(8, 10);
+                    const year = todoDateInput.value.substring(0, 4);
+                    const month = todoDateInput.value.substring(5, 7);
+                    const day = todoDateInput.value.substring(8, 10);
                     newTodo.setDueDate(Number(year), Number(month), Number(day));
                 }
                 newTodo.setPriority(todoPriorityInput.value);
@@ -85,18 +86,17 @@ const DisplayController = (() => {
         infoDoneBtn.addEventListener('click', (event) => {
             infoModal.classList.add('closed');
         });
-        
-    }
+    };
     const removeSelectedClass = () => {
-        let selectedProject = document.querySelector('.project.selected');
+        const selectedProject = document.querySelector('.project.selected');
         if (selectedProject) {
             selectedProject.classList.remove('selected');
         }
     };
     const addProject = (project) => {
-        let id = projectCount;
+        const id = projectCount;
         projectCount++;
-        let projectDiv = project.getDom(id);
+        const projectDiv = project.getDom(id);
         if (projectCount - 1 == 0) {
             projectDiv.classList.add('selected');
             setCurrentlySelectedProject(project);
@@ -105,28 +105,28 @@ const DisplayController = (() => {
     };
 
     const deleteProject = (id) => {
-        let select = "#" + id + '.project';
-        let project = document.querySelector(select);
+        const select = `#${id}.project`;
+        const project = document.querySelector(select);
         projectList.removeChild(project);
     };
 
     const displayTodoList = (project) => {
         todoList.replaceChildren();
-        let projectLen = project.numTodo();
+        const projectLen = project.numTodo();
         for (let i = 0; i < projectLen; i++) {
-            let todo = project.getTodoAt(i);
+            const todo = project.getTodoAt(i);
             console.log(todo);
             todoList.appendChild(todo.getDom(i));
         }
     };
     const emptyTodoList = () => {
-        let main = document.querySelector('.main-content');
-        todoList = document.querySelector('.todo-list')
-        let newTodoList = document.createElement('div');
+        const main = document.querySelector('.main-content');
+        todoList = document.querySelector('.todo-list');
+        const newTodoList = document.createElement('div');
         newTodoList.classList.add('todo-list');
         main.replaceChild(newTodoList, todoList);
         todoList = newTodoList;
-    }
+    };
     const getCurrentlySelectedProject = () => currentlySelectedProject;
     return {
         addProject,
